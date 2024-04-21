@@ -4,7 +4,7 @@ import java.net.Socket;
 
 public class Client {
 	public static void main(String[] args) {
-		Socket socket = null;					//Server와 통신하기 위한 Socket
+		Socket socket = null;			//Server와 통신하기 위한 Socket
 		BufferedReader serverReader = null;     //Server로부터 데이터를 읽어들이기 위한 입력스트림
 		BufferedReader keyboardReader = null;   //키보드로부터 읽어들이기 위한 입력스트림
 		PrintWriter writer = null;            	//서버로 데이터를 내보내기 위한 출력 스트림
