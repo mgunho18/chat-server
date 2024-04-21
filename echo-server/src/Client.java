@@ -9,6 +9,7 @@ public class Client {
 		BufferedReader keyboardReader = null;   //키보드로부터 읽어들이기 위한 입력스트림
 		PrintWriter writer = null;            	//서버로 데이터를 내보내기 위한 출력 스트림
 		InetAddress ia = null;
+
 		try {
 			ia = InetAddress.getByName("127.0.0.1");
 			socket = new Socket(ia,5050);
