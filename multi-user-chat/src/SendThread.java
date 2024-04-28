@@ -1,11 +1,11 @@
 import java.io.IOException;
-import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class SendThread extends Thread {
 
-	Socket socket = null;
+	Socket socket;
 	String name;
 
 	Scanner scanner = new Scanner(System.in);
@@ -18,7 +18,7 @@ public class SendThread extends Thread {
 	@Override
 	public void run() {
 		try {
-			PrintStream out = new PrintStream(socket.getOutputStream());
+			PrintWriter out = new PrintWriter(socket.getOutputStream());
 			out.println(name);
 			out.flush();
 

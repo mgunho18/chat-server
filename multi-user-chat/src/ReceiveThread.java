@@ -9,13 +9,14 @@ import java.util.List;
 
 public class ReceiveThread extends Thread {
 
-	static List<PrintWriter> list = Collections.synchronizedList(new ArrayList<PrintWriter>());
+	private static final List<PrintWriter> list = Collections.synchronizedList(new ArrayList<PrintWriter>());
 
-	Socket socket = null;
-	BufferedReader reader = null;
-	PrintWriter writer = null;
+	private Socket socket;
+	private BufferedReader reader;
+	private PrintWriter writer;
 
 	public ReceiveThread(Socket socket) {
+
 		this.socket = socket;
 		try {
 			writer = new PrintWriter(socket.getOutputStream());
@@ -33,7 +34,7 @@ public class ReceiveThread extends Thread {
 		try {
 			name = reader.readLine();
 			System.out.println("[" + name + " 새 연결 생성]");
-			sendAll("[" + name + "]님이 들어오셨습니다");
+			sendAll(name + "님이 들어오셨습니다");
 
 			while (reader != null) {
 				String inputMsg = reader.readLine();
@@ -52,7 +53,7 @@ public class ReceiveThread extends Thread {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("[" + name + " 연결종료");
+		System.out.println("[" + name + " 연결종료]");
 	}
 
 	private void sendAll(String s) {

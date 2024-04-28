@@ -11,7 +11,7 @@ public class MultiServer {
 
 	private void start() {
 		ServerSocket serverSocket = null;
-		Socket socket = null;
+		Socket socket;
 
 		try {
 			serverSocket = new ServerSocket(8000);
@@ -20,7 +20,7 @@ public class MultiServer {
 				socket = serverSocket.accept();
 
 				ReceiveThread receiveThread = new ReceiveThread(socket);
-				receiveThread.run();
+				receiveThread.start();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -37,6 +37,4 @@ public class MultiServer {
 		}
 
 	}
-
-
 }

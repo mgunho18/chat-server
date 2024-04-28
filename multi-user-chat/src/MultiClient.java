@@ -12,7 +12,7 @@ public class MultiClient {
 
 	private void start() {
 		Socket socket = null;
-		BufferedReader reader = null;
+		BufferedReader reader;
 
 		try {
 			socket = new Socket("localhost", 8000);
@@ -20,13 +20,15 @@ public class MultiClient {
 
 			String name = "user" + (int)(Math.random()*10);
 			Thread sendThread = new SendThread(socket, name);
-			sendThread.run();
+			sendThread.start();
 
 			reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			while (reader != null) {
+			while (true) {
 				String inputMsg = reader.readLine();
 				if(("[" + name + "]님이 나가셨습니다").equals(inputMsg))
 					break;
+				if(inputMsg.startsWith(name))
+					continue;
 				System.out.println("From:" + inputMsg);
 			}
 		} catch (IOException e) {
